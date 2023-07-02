@@ -46,6 +46,7 @@
     <div class="container-fluid">
         <div class="row px-5">
             <div class="tbl-fixed scrollable" style="width: 100%;" id="table-container">
+                @if (count($receipt_detail) > 0)
                 <table class="table table-bordered table-hover" id="fixed-table">
                     <thead class="table-head text-center text-white" style="background-color:#0e638b;">
                         <tr>
@@ -76,8 +77,12 @@
                         @endforeach
                     </tbody>
                 </table>
+                @else
+                    <h3 class="text-center">No data available</h3>
+                @endif
             </div>
         </div>
+        
         <div class="d-flex justify-content-center pt-2">
             {{ $receipt_detail->onEachSide(1)->links() }}
         </div>

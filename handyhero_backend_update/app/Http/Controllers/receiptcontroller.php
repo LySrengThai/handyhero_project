@@ -17,18 +17,35 @@ class receiptcontroller extends Controller
             $data = admin_table::where('admin_id', '=', Session::get('loginID'))->first();
         }
 
+        // $db_receipt = DB::table('receipt_detail')
+        //     ->join('user_detail', 'receipt_detail.user_id', '=', 'user_detail.user_id')
+        //     ->join('service_detail', 'receipt_detail.service_id', '=', 'service_detail.service_id')
+        //     ->join('company_detail', 'service_detail.company_id', '=', 'company_detail.company_id')
+        //     ->select(
+        //         'receipt_detail.*',
+        //         'user_detail.user_lname',
+        //         'user_detail.user_fname',
+        //         'service_detail.service_name',
+        //         'company_detail.company_name',
+        //     )
+        //     ->paginate(8);
+
+
         $db_receipt = DB::table('receipt_detail')
-            ->join('user_detail', 'receipt_detail.user_id', '=', 'user_detail.user_id')
-            ->join('service_detail', 'receipt_detail.service_id', '=', 'service_detail.service_id')
+            ->join('booking_detail', 'receipt_detail.booking_id', '=', 'booking_detail.book_id')
+            ->join('user_detail', 'booking_detail.user_id', '=', 'user_detail.user_id')
+            ->join('service_detail', 'booking_detail.service_id', '=', 'service_detail.service_id')
             ->join('company_detail', 'service_detail.company_id', '=', 'company_detail.company_id')
             ->select(
                 'receipt_detail.*',
                 'user_detail.user_lname',
                 'user_detail.user_fname',
                 'service_detail.service_name',
-                'company_detail.company_name',
+                'company_detail.company_name'
             )
-            ->paginate(10);
+            ->paginate(8);
+
+
         return view('receiptinfo.receipt_info', compact('data'), ['receipt_detail' => $db_receipt]);
     }
 
@@ -40,10 +57,11 @@ class receiptcontroller extends Controller
         }
 
         $db_receipt = DB::table('receipt_detail')
-            ->join('user_detail', 'receipt_detail.user_id', '=', 'user_detail.user_id')
-            ->join('service_detail', 'receipt_detail.service_id', '=', 'service_detail.service_id')
+
+            ->join('booking_detail', 'receipt_detail.booking_id', '=', 'booking_detail.book_id')
+            ->join('user_detail', 'booking_detail.user_id', '=', 'user_detail.user_id')
+            ->join('service_detail', 'booking_detail.service_id', '=', 'service_detail.service_id')
             ->join('company_detail', 'service_detail.company_id', '=', 'company_detail.company_id')
-            ->join('booking_detail', 'receipt_detail.service_id', '=', 'booking_detail.service_id')
             ->select(
                 'receipt_detail.*',
                 'user_detail.user_lname',
@@ -54,7 +72,7 @@ class receiptcontroller extends Controller
                 'service_detail.service_name',
                 'booking_detail.booking_date',
                 'company_detail.company_name'
-            )->where('receipt_detail.receipt_id', $receipt_id)->get();
+            )->where('receipt_id', $receipt_id)->first();
 
         return view('receiptinfo.receipt_view', compact('data'), ['receipt_detail' => $db_receipt]);
     }

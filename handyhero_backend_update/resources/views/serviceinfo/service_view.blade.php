@@ -74,6 +74,7 @@
                     </div>
                 @endif
 
+                @if (count($service_detail) > 0)
                 <table class="table table-bordered table-hover" id="fixed-table">
                     <thead class="table-head text-center text-white" style=" background-color:#0e638b;">
                         <tr>
@@ -103,6 +104,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                @else
+                    <h3 class="text-center">No data available</h3>
+                @endif
             </div>
         </div>
         <div class="d-flex justify-content-center pt-2">

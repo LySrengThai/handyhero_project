@@ -59,51 +59,55 @@
                     </div>
                 @endif
 
-                <table class="table table-bordered table-hover" id="fixed-table">
-                    <thead class="table-head text-center text-white" style="background-color:#0e638b;">
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">User Booked</th>
-                            <th scope="col">Company Booked</th>
-                            <th scope="col">Service Booked</th>
-                            <th scope="col">Book Date</th>
-                            <th scope="col">Booking Date</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-body text-center">
+                @if (count($book_detail) > 0)
+                    <table class="table table-bordered table-hover" id="fixed-table">
+                        <thead class="table-head text-center text-white" style="background-color:#0e638b;">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">User Booked</th>
+                                <th scope="col">Company Booked</th>
+                                <th scope="col">Service Booked</th>
+                                <th scope="col">Book Date</th>
+                                <th scope="col">Booking Date</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body text-center">
 
-                        @foreach ($book_detail as $book)
-                            <tr">
-                                <td scope="col">{{ $book->book_id }}</td>
-                                <td scope="col" class="text-wrap text-truncate">{{ $book->user_fname }}
-                                    {{ $book->user_lname }}</td>
-                                <td scope="col">{{ $book->company_name }}</td>
-                                <td scope="col">{{ $book->service_name }}</td>
-                                <td scope="col">{{ $book->book_date }}</td>
-                                <td scope="col">{{ $book->booking_date }}</td>
-                                @if ($book->status == 1)
-                                    <td scope="col" class="fw-bold text-success">Completed</td>
-                                    <td scope="col" style="background-color:#0e638b;"></td>
-                                @elseif ($book->status == 0)
-                                    <td scope="col" class="fw-bold text-danger">Incomplete</td>
-                                    <td scope="col" class="">
-                                        <a href="{{ route('booking.complete', $book->book_id) }}"
-                                            class="btn btn-sm btn-success">Done</a>
-                                        <a href="{{ route('booking.cancel', $book->book_id) }}"
-                                            class="btn btn-sm btn-danger">Cancel</a>
-                                    </td>
-                                @else
-                                    <td scope="col" class="fw-bold text-danger">Canceled</td>
-                                    <td scope="col" style="background-color:#0e638b;"></td>
-                                @endif
-                                </tr>
-                        @endforeach
+                            @foreach ($book_detail as $book)
+                                <tr">
+                                    <td scope="col">{{ $book->book_id }}</td>
+                                    <td scope="col" class="text-wrap text-truncate">{{ $book->user_fname }}
+                                        {{ $book->user_lname }}</td>
+                                    <td scope="col">{{ $book->company_name }}</td>
+                                    <td scope="col">{{ $book->service_name }}</td>
+                                    <td scope="col">{{ $book->book_date }}</td>
+                                    <td scope="col">{{ $book->booking_date }}</td>
+                                    @if ($book->status == 1)
+                                        <td scope="col" class="fw-bold text-success">Completed</td>
+                                        <td scope="col" style="background-color:#0e638b;"></td>
+                                    @elseif ($book->status == 0)
+                                        <td scope="col" class="fw-bold text-danger">Incomplete</td>
+                                        <td scope="col" class="">
+                                            <a href="{{ route('booking.complete', $book->book_id) }}"
+                                                class="btn btn-sm btn-success">Done</a>
+                                            <a href="{{ route('booking.cancel', $book->book_id) }}"
+                                                class="btn btn-sm btn-danger">Cancel</a>
+                                        </td>
+                                    @else
+                                        <td scope="col" class="fw-bold text-danger">Canceled</td>
+                                        <td scope="col" style="background-color:#0e638b;"></td>
+                                    @endif
+                                    </tr>
+                            @endforeach
 
-                    </tbody>
-                </table>
-                
+                        </tbody>
+                    </table>
+                @else
+                    <h3 class="text-center">No data available</h3>
+                @endif
+
             </div>
 
         </div>

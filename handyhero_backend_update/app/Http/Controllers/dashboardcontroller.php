@@ -37,7 +37,7 @@ class dashboardcontroller extends Controller
         $lastMonthSum = receipt_table::whereMonth('created_at', $lastMonth->month)->sum('receipt_price');
 
 
-        $db_user = DB::table('user_detail')->latest()->limit(6)->get();
+        $db_user = DB::table('user_detail')->latest()->limit(7)->get();
 
         return view('dashboard', compact('data', 'totaluser', 'totalcompany', 'totalservice', 'thisMonthBook', 'thisMonthSum', 'lastMonthSum'), ['user_detail' => $db_user]);
     }

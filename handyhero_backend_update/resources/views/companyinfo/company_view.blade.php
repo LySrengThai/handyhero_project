@@ -95,6 +95,7 @@
     });
 </script>
 @section('content')
+
     <div class="home-content">
         <i class='bx bx-menu'></i>
         <div class="col-7 py-4 " style="font-size: 32px;">
@@ -106,8 +107,7 @@
         <div class="row px-5">
             <div class="col-7 ">
                 <div class="b_btn">
-                    <button class="btn btn-sm btn-back" type="submit"
-                        onclick="location.href = '/company_info'">Back</button>
+                    <button class="btn btn-sm btn-back" type="submit" onclick="history.back()">Back</button>
                 </div>
                 <div>
                     <h2 style="color: #203D4A; font-size: 32px;">Company Name: {{ $company_detail[0]->company_name }}</h2>
@@ -173,7 +173,7 @@
                             {{-- Column for Company Publish Date --}}
                             <tr>
                                 <th scope="col" class="align-middle">Publish Date</th>
-                                <td scope="col">{{ $company_detail[0]->created_at }}</td>
+                                <td scope="col">{{ \Carbon\Carbon::parse($company_detail[0]->created_at)->format('Y-m-d') }}</td>
                             </tr>
 
                             {{-- Column for Company Address --}}

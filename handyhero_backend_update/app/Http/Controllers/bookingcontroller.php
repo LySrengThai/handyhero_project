@@ -31,7 +31,7 @@ class bookingcontroller extends Controller
                 'user_detail.user_fname',
                 'service_detail.service_name',
                 'company_detail.company_name'
-            )->paginate(8);
+            )->paginate(9);
         // Pass the logged-in admin data and the booking details to the 'book_info' view
         return view('bookinfo.book_info', compact('data'), ['book_detail' => $db_booking]);
     }

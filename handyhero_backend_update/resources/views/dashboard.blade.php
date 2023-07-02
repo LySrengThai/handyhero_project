@@ -114,7 +114,45 @@
             </div>
 
             <div class="col-12 col-sm-6 pb-2">
+                <h1>Member</h1>
+                <div class="col mb-3">
+                    <div class="card card-body py-3" style="background: linear-gradient(90deg, #203d4a 0%, #0e638b 43%);">
+                        <div class="d-flex justify-content-start align-items-center">
+                            <img src="../assets/images/avatar.jpg" alt="Profile Image" class="mr-3 rounded"
+                                style="width: 80px; height: 80px;">
+                            <div class="text-white">
+                                <h5 class="text-truncate">Frontend Role</h5>
+                                <p>Socheata Sokhachan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col mb-3">
+                    <div class="card card-body py-3" style="background: linear-gradient(90deg, #203d4a 0%, #0e638b 43%);">
+                        <div class="d-flex justify-content-start align-items-center">
+                            <img src="../assets/images/avatar.jpg" alt="Profile Image" class="mr-3 rounded"
+                                style="width: 80px; height: 80px;">
+                            <div class="text-white">
+                                <h5 class="text-truncate">Backend Role</h5>
+                                <p>Lysreng Thai</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col mb-3">
+                    <div class="card card-body py-3" style="background: linear-gradient(90deg, #203d4a 0%, #0e638b 43%);">
+                        <div class="d-flex justify-content-start align-items-center">
+                            <img src="../assets/images/avatar.jpg" alt="Profile Image" class="mr-3 rounded"
+                                style="width: 80px; height: 80px;">
+                            <div class="text-white">
+                                <h5 class="text-truncate">API Role</h5>
+                                <p>Lysa Sorkeo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>

@@ -106,8 +106,7 @@
         <div class="row px-5">
             <div class="col-7">
                 <div class="b_btn">
-                    <button class="btn btn-sm btn-back" type="submit"
-                        onclick="location.href = '/service_info'">Back</button>
+                    <button class="btn btn-sm btn-back" type="submit" onclick="history.back()">Back</button>
                 </div>
                 <div>
                     <small>Click on the content to edit (except ID)</small>

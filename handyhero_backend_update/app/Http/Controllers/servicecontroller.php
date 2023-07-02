@@ -49,7 +49,7 @@ class servicecontroller extends Controller
             ->join('service_cate', 'service_cate.cate_id', '=', 'service_detail.cate_id')
             ->join('company_detail', 'company_detail.company_id', '=', 'service_detail.company_id')
             ->select('service_detail.*', 'service_cate.cate_id', 'company_detail.company_name')
-            ->where('service_detail.service_id', $service_id)
+            ->where('service_id', $service_id)
             ->get();
 
         $db_cate = DB::table('service_cate')->get();

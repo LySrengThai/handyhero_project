@@ -50,8 +50,8 @@
                             <table class="elementscontainer">
                                 <tr>
                                     <td>
-                                        <input type="text" name="search" class="search"
-                                            placeholder="Search Company" value="{{ $search }}">
+                                        <input type="text" name="search" class="search" placeholder="Search Company"
+                                            value="{{ $search }}">
                                     </td>
                                     <td>
                                         <button class="btn"><i class='bx bx-search searchicon'></i></button>
@@ -77,35 +77,40 @@
                     </div>
                 @endif
 
-                <table class="table table-bordered table-hover" id="fixed-table">
-                    <thead class="table-head text-center text-white">
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Company Name</th>
-                            <th scope="col">Company Phone</th>
-                            <th scope="col">Company Email</th>
-                            <th scope="col">Publish Date</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-body text-center">
-                        @foreach ($company_detail as $company)
+                @if (count($company_detail) > 0)
+                    <table class="table table-bordered table-hover" id="fixed-table">
+                        <thead class="table-head text-center text-white">
                             <tr>
-                                <td scope="col">{{ $company->company_id }}</td>
-                                <td scope="col">{{ $company->company_name }}</td>
-                                <td scope="col">{{ substr_replace($company->company_number, '-', 3, 0) }}</td>
-                                <td scope="col">{{ $company->company_email }}</td>
-                                <td scope="col">{{ $company->created_at }}</td>
-                                <td>
-                                    <a href="{{ url('/company_view' . $company->company_id) }}"
-                                        class="btn btn-sm btn-primary">View</a>
-                                    <a href="{{ url('/company_delete' . $company->company_id) }}"
-                                        class="btn btn-sm btn-danger">Block</a>
-                                </td>
+                                <th scope="col">ID</th>
+                                <th scope="col">Company Name</th>
+                                <th scope="col">Company Phone</th>
+                                <th scope="col">Company Email</th>
+                                <th scope="col">Publish Date</th>
+                                <th scope="col">Action</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody class="table-body text-center">
+                            @foreach ($company_detail as $company)
+                                <tr>
+                                    <td scope="col">{{ $company->company_id }}</td>
+                                    <td scope="col">{{ $company->company_name }}</td>
+                                    <td scope="col">{{ substr_replace($company->company_number, '-', 3, 0) }}</td>
+                                    <td scope="col">{{ $company->company_email }}</td>
+                                    <td scope="col">{{ \Carbon\Carbon::parse($company->created_at)->format('Y-m-d') }}
+                                    </td>
+                                    <td>
+                                        <a href="{{ url('/company_view' . $company->company_id) }}"
+                                            class="btn btn-sm btn-primary">View</a>
+                                        <a href="{{ url('/company_delete' . $company->company_id) }}"
+                                            class="btn btn-sm btn-danger">Block</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <h3 class="text-center">No data available</h3>
+                @endif
             </div>
         </div>
         <div class="d-flex justify-content-center pt-2">

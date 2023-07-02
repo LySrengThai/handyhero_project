@@ -35,6 +35,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         window.addEventListener('DOMContentLoaded', function() {
             var tableContainer = document.getElementById('table-container');
@@ -52,6 +53,18 @@
         function goBack() {
             window.history.back();
         }
+
+        $(document).ready(function() {
+            // Show the success alert for 10 seconds
+            if ($("#success-alert").length) {
+                $("#success-alert").delay(5000).fadeOut("slow");
+            }
+
+            // Show the fail alert for 10 seconds
+            if ($("#fail-alert").length) {
+                $("#fail-alert").delay(5000).fadeOut("slow");
+            }
+        });
     </script>
 </body>
 

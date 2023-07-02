@@ -33,7 +33,7 @@ Route::get('/company_detail', function () {
 })->middleware('authcheck');
 
 Route::get('/service_detail', function(){
-    return view('userpage.ervice_detail');
+    return view('userpage.service_detail');
 })->middleware('authcheck');
 
 Route::get('/acc_setting', function(){
