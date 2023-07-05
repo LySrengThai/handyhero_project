@@ -67,8 +67,6 @@
                             <button class="btn py-1 px-3" style="border-radius: 200px; background-color: aqua;"
                                 onclick="location.href = ' /logout'">
                                 Sign out</button>
-
-
                         </div>
                     </ul>
                 </div>

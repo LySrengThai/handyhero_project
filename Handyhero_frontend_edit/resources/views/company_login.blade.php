@@ -1,5 +1,5 @@
 @extends('layout.homemaster')
-<title>Log Into Your Page</title>
+<title>Company Login</title>
 <link href="asset/css/style1.css" rel="stylesheet">
 
 <style>
@@ -43,7 +43,7 @@
             </div>
 
             <div class="button">
-                <input type="submit" value="Log Into Page" onclick="location.href='/companylogin';">
+                <input type="submit" value="Log Into Page">
             </div>
 
         </form>

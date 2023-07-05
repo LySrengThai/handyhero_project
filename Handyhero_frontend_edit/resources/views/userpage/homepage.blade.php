@@ -1,4 +1,5 @@
 @extends('layout.homemaster')
+<title>Homepage</title>
 <style>
     #container1 {
         background-color: #203D4A;

@@ -9,14 +9,13 @@
     #navbarSupportedContent ul li a:hover {
         color: aqua;
     }
-
 </style>
 
 <header>
     <nav class="navbar navbar-expand-lg bg-white shadow">
         <div class="container">
             <a href="/home" class="navbar-brand">
-                <img src="images/brand.png" alt="apple" width="80" height="50" class=" d-inline-block align-middle">
+                <img src="/images/brand.png" alt="apple" width="80" height="50" class=" d-inline-block align-middle">
             </a>
 
             <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
@@ -30,9 +29,16 @@
                     <div class="vr"></div>
                     <div class="dropdown open mx-2">
                         <button class="btn border-none dropdown-toggle" type="button" data-toggle="dropdown">
-                            <span class="mx-2">User</span>
+                            @php
+                            $user_data = array();
+                            if (Session::has('userID')) {
+                            $user_data = \App\Models\maintable::where('user_id', '=', Session::get('userID'))->first();
+                            }
+                            @endphp
+                            <span class="mx-2">{{$user_data->user_fname}}</span>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="triggerID">
+                            <button class="dropdown-item" onclick="location.href = '/acc_setting'">Setting</button>
                             <button class="dropdown-item" onclick="location.href = '/logout'">Sign Out</button>
                         </div>
                     </div>

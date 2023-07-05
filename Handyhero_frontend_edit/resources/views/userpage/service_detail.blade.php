@@ -13,11 +13,11 @@
     </div><br>
     <div class="row">
         <div class="col">
-            <h1 style="color: #203D4A;">Fence and Gate Repair</h1>
-            <button class="btn py-1 px-3" style="border-radius: 200px; background-color: aqua;">Handyman</button>
-            <p class="pt-2">from <b>៛20,000</b></p>
+            <h1 style="color: #203D4A;">{{ \Illuminate\Support\Str::limit($servicedetail->service_name, 50) }}</h1>
+            <button class="btn py-1 px-3" style="border-radius: 200px; background-color: aqua;">{{ \Illuminate\Support\Str::limit($servicedetail->category, 50) }}</button>
+            <p class="pt-2">From <b>៛{{number_format($servicedetail->service_price)}}</b></p>
             <div class="d-flex">
-                <p><b>Service by </b><a href="/company_detail" style="color:#1383b5;">FixMeHome</a></p>
+                <p><b>Service by </b><a href="{{ url('/company_detail' . $servicedetail->company_id) }}" style="color:#1383b5;">{{ \Illuminate\Support\Str::limit($servicedetail->company_name, 50) }}</a></p>
                 <div class="flex-shrink-0">
                     <img src="/images/fixmelogo.png" alt="Generic placeholder image" class="img-fluid rounded-circle p-1" style="width: 30px;">
                 </div>
@@ -27,7 +27,7 @@
         <div class="col">
             <div class="move-right">
                 <button class="btn btn-lg py-0 px-3" style="background-color: #1383b5; border-radius: 200px;">
-                    <a href="/booking" class="link-offset-2 link-underline link-underline-opacity-0 text-white">Book Service</a></button>
+                    <a href="{{ route('booking',['service_id' => $servicedetail->service_id ]) }}" class="link-offset-2 link-underline link-underline-opacity-0 text-white">Book Service</a></button>
             </div>
         </div>
     </div>
@@ -39,15 +39,7 @@
             </div>
 
             <div class="col-7" style="font-size: 24px;">
-                <p>At FixMeHome, we deal with all kinds of fence damage caused by everything from extreme weather to a simple accident.
-                    Some of the most common fence repair we handle include:
-                </p>
-                <ul>
-                    <li>Tightening loose fence boards.</li>
-                    <li>Replacing missing fence panels</li>
-                    <li>Fixing broken fence gates</li>
-                    <li>Fixing broken fence hardware, like hinges and latches</li>
-                </ul>
+                <p>{!! nl2br(e($servicedetail->service_description)) !!}</p>
             </div>
         </div>
     </div>

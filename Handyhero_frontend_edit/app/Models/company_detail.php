@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class company_detail extends Model
 {
-    public $table = 'company_detail';
-    public $primaryKey = 'company_id';
-    public $incrementing = true;
-    public $timestamps = false;
+    protected $table = 'company_detail';
+    protected $primaryKey = 'company_id';
 
 }

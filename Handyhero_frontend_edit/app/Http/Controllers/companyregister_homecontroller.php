@@ -4,35 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\company_detail;
+use Illuminate\Support\Facades\Hash;
 
 class companyregister_homecontroller extends Controller
 {
     function companyregister_homeIndex()
     {
-        return view('userpage.home');
-
+        return view('userpage.register_provider');
     }
-    function companyregister_DataInsert(Request $request)
+    function companyregister_DataInsert(Request $req)
     {
-        $company_name= $request -> input ('company_name');
-        $company_email= $request -> input ('company_email');
-        $company_number= $request -> input ('company_number');
-        $company_address= $request -> input ('company_address');
-        $company_password= $request -> input ('company_password');
-        $company_description= $request -> input ('company_description');
-        
-
-        $isInsertSuccess = company_detail::insert ([ 'company_name' => $company_name,
-                                                  'company_email' => $company_email,
-                                                  'company_number' => $company_number,
-                                                  'company_address' => $company_address,
-                                                  'company_password' => $company_password,
-                                                  'company_description' => $company_description                        
+        $req->validate([
+            'company_name' => 'required|unique:company_detail',
+            'company_email' => 'required|unique:company_detail',
+            'company_number' => 'required',
+            'company_password' => 'required|min:8',
+            'company_address' => 'required',
+            'company_description' => 'required'
         ]);
 
-        // test if it is successful
-        if ($isInsertSuccess) echo '<h1>success</h1>';
-        else echo '<h1>fail</h1>';
+        $r_company = new company_detail();
+        $r_company->company_name = $req->company_name;
+        $r_company->company_email = $req->company_email;
+        $r_company->company_number = $req->company_number;
+        $r_company->company_password = Hash::make($req->company_password);
+        $r_company->company_address = $req->company_address;
+        $r_company->description = $req->company_description;
 
+        $res_company = $r_company->save();
+
+        if ($res_company) {
+            return back()->with('success', 'You have registered company successfully');
+        } else {
+            return back()->with('fail', 'Something went wrong');
+        }
     }
 }
