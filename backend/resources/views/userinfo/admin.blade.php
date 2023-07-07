@@ -91,6 +91,7 @@
                                 <th scope="col">Gender</th>
                                 <th scope="col">Phone Number</th>
                                 <th scope="col">Email</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -102,12 +103,31 @@
                                     <td scope="col">{{ $detail->user_gender }}</td>
                                     <td scope="col">{{ substr_replace($detail->user_number, '-', 3, 0) }}</td>
                                     <td scope="col">{{ $detail->user_email }}</td>
-                                    <td>
+                                    {{-- <td>
                                         <a href="{{ url('/user_view' . $detail->user_id) }}"
                                             class="btn btn-sm btn-primary">View</a>
                                         <a href="{{ url('/user_delete' . $detail->user_id) }}"
                                             class="btn btn-sm btn-danger">Block</a>
-                                    </td>
+                                    </td> --}}
+                                    @if ($detail->status == 0)
+                                        <td scope="col" class="fw-bold text-success">Active</td>
+                                        <td>
+                                            <a href="{{ url('/user_view' . $detail->user_id) }}"
+                                                class="btn btn-sm btn-primary">View</a>
+                                            <a href="{{ route('user.block', $detail->user_id) }}"
+                                                class="btn btn-sm btn-danger">Block</a>
+                                            {{-- <a href="{{ route('user.block', $detail->user_id) }}"
+                                                class="btn btn-sm btn-danger">Block</a> --}}
+                                        </td>
+                                    @elseif ($detail->status == 1)
+                                        <td scope="col" class="fw-bold text-danger">Blocked</td>
+                                        <td scope="col">
+                                            <a href="{{ route('user.unblock', $detail->user_id) }}"
+                                                class="btn btn-sm btn-success">Unblock</a>
+                                            <a href="{{ url('/user_delete' . $detail->user_id) }}"
+                                                class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

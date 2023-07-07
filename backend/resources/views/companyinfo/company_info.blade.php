@@ -102,7 +102,7 @@
                                         <a href="{{ url('/company_view' . $company->company_id) }}"
                                             class="btn btn-sm btn-primary">View</a>
                                         <a href="{{ url('/company_delete' . $company->company_id) }}"
-                                            class="btn btn-sm btn-danger">Block</a>
+                                            class="btn btn-sm btn-danger">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

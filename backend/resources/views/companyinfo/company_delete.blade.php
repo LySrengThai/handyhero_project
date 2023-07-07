@@ -22,7 +22,7 @@
             </div>
             <div class="col-md-4 text-center">
                 <div class="card">
-                    <h4 class="card-header text-capitalize">do you want to block? {{ $company_detail[0]->company_name }}
+                    <h4 class="card-header text-capitalize">do you want to Delete? {{ $company_detail[0]->company_name }}
                     </h4>
                     <div class="card-body">
                         <a href="/company_info" class="btn btn-sm btn-primary">No</a>

@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-4 text-center pt-5">
                 <div class="card">
-                    <h4 class="card-header text-capitalize">Do you want to block<b> {{ $user_detail[0]->user_fname }}</b>?
+                    <h4 class="card-header text-capitalize">Do you want to delete<b> {{ $user_detail[0]->user_fname }}</b>?
                     </h4>
                     <div class="card-body">
                         <a href="javascript:history.back()" class="btn btn-sm btn-primary">No</a>

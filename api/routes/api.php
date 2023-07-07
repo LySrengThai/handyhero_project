@@ -37,6 +37,8 @@ Route::middleware('companyAuth:companyAuth')->group(function () {
         Route::get('/company/companyPage', 'listing');
         Route::post('company/add', 'addNewCompany');
         Route::post('/company/insertservice', 'serviceInsert');
+        Route::get('/company/bookings', 'bookingdisplay');
+
     });
 });
 

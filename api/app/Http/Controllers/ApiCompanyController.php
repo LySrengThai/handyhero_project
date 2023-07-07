@@ -55,7 +55,7 @@ class ApiCompanyController extends Controller
             'services' => $db_service,
             'bookings' => $db_booking,
             'category' => $db_cate
-        ],200);
+        ], 200);
     }
     public function serviceInsert(Request $req)
     {
@@ -70,13 +70,13 @@ class ApiCompanyController extends Controller
 
         if ($insert_book) {
             return response()->json([
-                'message'=>"Service have registered successfully"
-            ],200);
+                'message' => "Service have registered successfully"
+            ], 200);
             // return back()->with('success', 'Service have registered successfully');
         } else {
             return response()->json([
-                'message'=>"Something went wrong"
-            ],400);
+                'message' => "Something went wrong"
+            ], 400);
             // return back()->with('fail', 'Something went wrong');
         }
     }
@@ -96,11 +96,13 @@ class ApiCompanyController extends Controller
             'company_address' => $company_address,
             'company_password' => $company_password,
             'description' => $description
-    ]);
+        ]);
 
-       if($isInsertSuccess) 
-       { return response()->json(["addNewCompany" => 'success'], 200);} 
-       else 
-       { return response()->json(["addNewCompany" => 'failure'], 400);}
+        if ($isInsertSuccess) {
+            return response()->json(["addNewCompany" => 'success'], 200);
+        } else {
+            return response()->json(["addNewCompany" => 'failure'], 400);
+        }
     }
+    // 
 }

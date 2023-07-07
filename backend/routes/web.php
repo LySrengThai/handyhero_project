@@ -7,7 +7,6 @@ use App\Http\Controllers\companycontroller;
 use App\Http\Controllers\servicecontroller;
 use App\Http\Controllers\bookingcontroller;
 use App\Http\Controllers\dashboardcontroller;
-use App\Http\Controllers\receiptcontroller;
 
 
 
@@ -26,13 +25,13 @@ use App\Http\Controllers\receiptcontroller;
 //     return view('admin');
 // });
 
-Route::get('/admin_register',[logincontroller::class, 'admin_register'])->middleware('needtoLogIn');
+Route::get('/admin_register', [logincontroller::class, 'admin_register'])->middleware('needtoLogIn');
 Route::post('/registeredadmin', [logincontroller::class, 'registeradmin'])->name('registeredadmin');
 
 
-Route::get('/admin_login',[logincontroller::class, 'login'])->middleware('alreadyLogIn');
+Route::get('/admin_login', [logincontroller::class, 'login'])->middleware('alreadyLogIn');
 Route::post('/logged', [logincontroller::class, 'loggedin'])->name('logged');
-Route::get('/logout',[logincontroller::class, 'logout']);
+Route::get('/logout', [logincontroller::class, 'logout']);
 
 Route::get('/dashboard', [dashboardcontroller::class, 'dashboardIndex']);
 
@@ -42,6 +41,9 @@ Route::get('/user_view{user_id}', [viewcontroller::class, 'user_view'])->middlew
 Route::post('/userInfo_update{user_id}', [viewcontroller::class, 'userinfo_update']);
 Route::get('/user_delete{user_id}', [viewcontroller::class, 'user_del'])->middleware('needtoLogIn');
 Route::get('/userdelete/{user_id}', [viewcontroller::class, 'delete_user'])->middleware('needtoLogIn');
+Route::get('/userblock/{user_id}', [viewcontroller::class, 'block_user'])->name('user.block')->middleware('needtoLogIn');
+Route::get('/userunblock/{user_id}', [viewcontroller::class, 'unblock_user'])->name('user.unblock')->middleware('needtoLogIn');
+
 // Company Information Route
 Route::get('/company_info', [companycontroller::class, 'company_data'])->middleware('needtoLogIn');
 Route::get('/company_view{company_id}', [companycontroller::class, 'company_view'])->middleware('needtoLogIn');
@@ -59,8 +61,8 @@ Route::get('/booking_info', [bookingcontroller::class, 'booking_data'])->middlew
 Route::get('/bookingcancel/{book_id}', [bookingcontroller::class, 'cancel_booking'])->name('booking.cancel')->middleware('needtoLogIn');
 Route::get('/bookingcomplete/{book_id}', [bookingcontroller::class, 'complete_booking'])->name('booking.complete')->middleware('needtoLogIn');
 
-Route::get('/receipt_info', [receiptcontroller::class, 'receipt_data'])->middleware('needtoLogIn');
-Route::get('/receipt_view{receipt_id}', [receiptcontroller::class, 'receipt_view'])->middleware('needtoLogIn');
+// Route::get('/receipt_info', [receiptcontroller::class, 'receipt_data'])->middleware('needtoLogIn');
+// Route::get('/receipt_view{receipt_id}', [receiptcontroller::class, 'receipt_view'])->middleware('needtoLogIn');
 
 
 

@@ -21,9 +21,9 @@ class viewcontroller extends Controller
         $search = $req['search'] ?? "";
         if ($search != "") {
             $db_user = DB::table('user_detail')
-            ->where('user_fname', 'LIKE', "%$search%")
-            ->orWhere('user_lname', 'LIKE', "%$search%")
-            ->paginate(8)->appends(['search' => $search]);
+                ->where('user_fname', 'LIKE', "%$search%")
+                ->orWhere('user_lname', 'LIKE', "%$search%")
+                ->paginate(8)->appends(['search' => $search]);
         } else {
             $db_user = DB::table('user_detail')->paginate(8);
         }
@@ -85,6 +85,28 @@ class viewcontroller extends Controller
     {
         $user_id = $req->user_id;
         $db_user = DB::table('user_detail')->where('user_id', $user_id)->delete();
-        return redirect('/user_info')->with('fail', 'User Blocked');
+        return redirect('/user_info')->with('fail', 'User Deleted');
+    }
+
+    public function block_user(Request $req)
+    {
+        $user_id = $req->user_id;
+
+        $db_user = user_table::find($user_id);
+        $db_user->status = 1;
+        $db_user->save();
+
+        return redirect()->back()->with('fail', 'User has been blocked.');
+    }
+
+    public function unblock_user(Request $req)
+    {
+        $user_id = $req->user_id;
+
+        $db_user = user_table::find($user_id);
+        $db_user->status = 0;
+        $db_user->save();
+
+        return redirect()->back()->with('success', 'User has been unblocked.');
     }
 }
