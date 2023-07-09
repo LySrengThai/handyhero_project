@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
+use App\Models\Cat;
 use App\Models\company_detail;
 use App\Models\ServiceDetail;
 use Illuminate\Http\Request;
@@ -62,6 +63,50 @@ class CompanyControllerManagement extends Controller
             return back()->with('success', 'Service have registered successfully');
         } else {
             return back()->with('fail', 'Something went wrong');
+        }
+    }
+    public function ServiceEdit($service_id)
+    {
+        $service = ServiceDetail::find($service_id);
+        $category = Cat::all();
+        return view('company.companyedit', [
+            'service' => $service,
+            'category' => $category
+        ]);
+    }
+    public function ServiceUpdate(Request $request, ServiceDetail $service)
+    {
+        $validatedData = $request->validate([
+            'servicename' => 'required',
+            'category' => 'required',
+            'serviceprice' => 'required|numeric',
+            'serdescription' => 'required',
+        ]);
+
+        $service->service_name = $validatedData['servicename'];
+        $service->cate_id = $validatedData['category'];
+        $service->service_price = $validatedData['serviceprice'];
+        $service->service_description = $validatedData['serdescription'];
+
+        $service->save();
+        if ($service) {
+            return redirect()->route('companypage')->with('success', 'Service updated successfully');
+        } else {
+            return back()->with('fail', 'Please fill the corect format form.');
+        }
+    }
+    public function destroy($service_id)
+    {
+        try {
+            // Find the service by ID and delete it
+            $service = ServiceDetail::findOrFail($service_id);
+            $service->delete();
+    
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'Service deleted successfully.');
+        } catch (\Exception $e) {
+            // Redirect back with error message
+            return redirect()->back()->with('fail', 'Failed to delete service.');
         }
     }
 }

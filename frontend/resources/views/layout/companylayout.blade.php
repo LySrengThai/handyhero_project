@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +11,12 @@
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"
         integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+    
     <script src="https://kit.fontawesome.com/605594b358.js" crossorigin="anonymous"></script>
+   
+    <script src="https://example.com/fontawesome/v5.15.4/js/all.js" data-auto-a11y="true" ></script>
+ 
+
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
@@ -44,14 +48,12 @@
     }
     </style>
 </head>
-
 <body class="bg-light">
     <header>
-
         <nav class="navbar navbar-expand-lg bg-white shadow">
             <div class="container">
                 <a href="/home" class="navbar-brand">
-                    <img src="images/brand.png" alt="apple" width="80" height="50" class=" d-inline-block align-middle">
+                    <img src="/images/brand.png" alt="apple" width="80" height="50" class=" d-inline-block align-middle">
                 </a>
 
                 <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -103,6 +105,7 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    
 </script>
 
 </html>

@@ -46,6 +46,10 @@ Route::post('/companyLoggedIn', [logincontroller::class, 'company_loggedin'])->n
 Route::get('/companypage', [CompanyControllerManagement::class, 'listing'])->name('companypage');
 Route::post('/insertservice', [CompanyControllerManagement::class, 'serviceInsert'])->name('insertservice');
 
+Route::get('/company/services/{service}/edit', [CompanyControllerManagement::class,'ServiceEdit'])->name('services.edit');
+Route::put('/company/services/{service}', [CompanyControllerManagement::class,'ServiceUpdate'])->name('services.update');
+Route::delete('/company/services/{service}',  [CompanyControllerManagement::class,'destroy'])->name('services.delete');
+
 
 Route::get('/login', [logincontroller::class, 'user_login']);
 Route::post('/userLoggedIn', [logincontroller::class, 'user_loggedin'])->name('userLoggedIn');
