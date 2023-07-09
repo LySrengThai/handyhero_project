@@ -37,26 +37,28 @@ class ApiCompanyController extends Controller
             ->join('user_detail', 'booking_detail.user_id', '=', 'user_detail.user_id')
             ->join('service_detail', 'booking_detail.service_id', '=', 'service_detail.service_id')
             ->join('company_detail', 'service_detail.company_id', '=', 'company_detail.company_id')
-            ->select(
-                'booking_detail.*',
-                'user_detail.user_lname',
-                'user_detail.user_fname',
-                'user_detail.user_number',
-                'user_detail.user_email',
-                'user_detail.user_address',
-                'service_detail.service_name'
-            )
+            ->select('booking_detail.*', 'user_detail.user_lname', 'user_detail.user_fname', 'user_detail.user_number', 'user_detail.user_email', 'user_detail.user_address', 'service_detail.service_name')
             ->where('service_detail.company_id', $this->userData->company_id)
             ->paginate(10);
 
         $db_cate = DB::table('service_cate')->get();
 
-        return response()->json([
-            'services' => $db_service,
-            'bookings' => $db_booking,
-            'category' => $db_cate
-        ], 200);
+        // Exclude the 'password' field from the 'company_detail' table
+        $db_service = $db_service->map(function ($item) {
+            unset($item->password);
+            return $item;
+        });
+
+        return response()->json(
+            [
+                'services' => $db_service,
+                'bookings' => $db_booking,
+                'category' => $db_cate,
+            ],
+            200,
+        );
     }
+
     public function serviceInsert(Request $req)
     {
         $i_book = new ServiceDetail();
@@ -69,14 +71,20 @@ class ApiCompanyController extends Controller
         $insert_book = $i_book->save();
 
         if ($insert_book) {
-            return response()->json([
-                'message' => "Service have registered successfully"
-            ], 200);
+            return response()->json(
+                [
+                    'message' => 'Service have registered successfully',
+                ],
+                200,
+            );
             // return back()->with('success', 'Service have registered successfully');
         } else {
-            return response()->json([
-                'message' => "Something went wrong"
-            ], 400);
+            return response()->json(
+                [
+                    'message' => 'Something went wrong',
+                ],
+                400,
+            );
             // return back()->with('fail', 'Something went wrong');
         }
     }
@@ -95,14 +103,42 @@ class ApiCompanyController extends Controller
             'company_number' => $company_number,
             'company_address' => $company_address,
             'company_password' => $company_password,
-            'description' => $description
+            'description' => $description,
         ]);
 
         if ($isInsertSuccess) {
-            return response()->json(["addNewCompany" => 'success'], 200);
+            return response()->json(['addNewCompany' => 'success'], 200);
         } else {
-            return response()->json(["addNewCompany" => 'failure'], 400);
+            return response()->json(['addNewCompany' => 'failure'], 400);
         }
     }
-    // 
+
+    public function bookingdisplay(Request $req)
+    {
+        $company_data = [];
+
+        // Remove the session check and retrieval of company data
+
+        $db_service = DB::table('service_detail')
+            ->join('service_cate', 'service_cate.cate_id', '=', 'service_detail.cate_id')
+            ->join('company_detail', 'company_detail.company_id', '=', 'service_detail.company_id')
+            ->select('service_detail.*', 'service_cate.category', 'company_detail.company_name')
+            ->where('service_detail.company_id', $req->input('companyID')) // Use the value from the request instead of session
+            ->get();
+
+        $db_booking = DB::table('booking_detail')
+            ->join('service_detail', 'booking_detail.service_id', '=', 'service_detail.service_id')
+            ->join('company_detail', 'service_detail.company_id', '=', 'company_detail.company_id')
+            ->select('booking_detail.*', 'service_detail.service_name')
+            ->where('service_detail.company_id', $req->input('companyID')) // Use the value from the request instead of session
+            ->paginate(10);
+
+        $db_cate = DB::table('service_cate')->get();
+
+        return view('company.companypage', compact('company_data'), [
+            'services' => $db_service,
+            'bookings' => $db_booking,
+            'category' => $db_cate,
+        ]);
+    }
 }

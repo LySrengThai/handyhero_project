@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +32,10 @@ class ApiUserController extends Controller
     //home page
     public function listdetail(Request $request)
     {
-        $db_company = DB::table('company_detail')->get();
+        $db_company = DB::table('company_detail')
+            ->select('company_id', 'company_name', 'company_address', 'company_email', 'company_number')
+            ->get();
+
         $db_service = DB::table('service_detail')
             ->join('service_cate', 'service_cate.cate_id', '=', 'service_detail.cate_id')
             ->select('service_detail.*', 'service_cate.category')
@@ -47,6 +49,7 @@ class ApiUserController extends Controller
             200,
         );
     }
+
     //add new user
     function addNewUser(Request $req)
     {
@@ -77,10 +80,12 @@ class ApiUserController extends Controller
             return response()->json(['addNewUser' => 'failure'], 400);
         }
     }
-    //list all of the company page on User's side
+    // List all of the company pages on User's side
     function listallcompany()
     {
-        $db_company = DB::table('company_detail')->get();
+        $db_company = DB::table('company_detail')
+            ->select('company_id', 'company_name', 'company_address', 'company_email', 'company_number')
+            ->get();
 
         return response()->json(
             [
@@ -89,7 +94,8 @@ class ApiUserController extends Controller
             200,
         );
     }
-    //list all of the servicepage on User's side
+
+    // List all of the service pages on User's side
     function listallservice()
     {
         $db_service = DB::table('service_detail')
@@ -98,6 +104,12 @@ class ApiUserController extends Controller
             ->select('service_detail.*', 'service_cate.category', 'company_detail.company_name')
             ->paginate(6);
 
+        // Exclude the 'password' field from the 'company_detail' table
+        $db_service = $db_service->map(function ($item) {
+            unset($item->password);
+            return $item;
+        });
+
         return response()->json(
             [
                 'service_detail' => $db_service,
@@ -105,6 +117,4 @@ class ApiUserController extends Controller
             200,
         );
     }
-
-    
 }
