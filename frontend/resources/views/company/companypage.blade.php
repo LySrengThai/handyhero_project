@@ -117,7 +117,7 @@
                         <p class="lead">{!! nl2br(e($company_data->description)) !!}</p>
                     </div>
                     <div class="container position-relative">
-                        <a href="#" class=" text-black px-4 border border-success rounded-pill" style="position: absolute; right: 0;"><i class="fa-solid fa-pen-to-square"></i><span style="margin-left: 10px;">Edit</span></a>
+                        <a href="{{ route('company.edit', $company_data->company_id)}}" class=" text-black px-4 border border-success rounded-pill" style="position: absolute; right: 0;"><i class="fa-solid fa-pen-to-square"></i><span style="margin-left: 10px;">Edit</span></a>
                     </div>
                 </div>
             </div>
@@ -152,8 +152,6 @@
                                             </form>
                                         </div>
                                     </div>
-                                
-
                                 </div>
                             </div>
                         </div>
@@ -255,7 +253,7 @@
                                     <td>{{ $book->service_name }}</td>
                                     <td class="text-nowrap">{{ $book->book_date }}</td>
                                     <td>
-                                        <a href="#" style="color: grey;"><i class="fa-sharp fa-solid fa-trash fa-lg"></i></a>
+                                        <a href="" style="color: grey;"><i class="fa-sharp fa-solid fa-trash fa-lg"></i></a>
                                         <a href="#" style="color: grey; margin-left: 5%;"><i class="fa-solid fa-circle-check fa-lg"></i></a>
                                     </td>
 

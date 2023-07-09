@@ -69,7 +69,7 @@ class CompanyControllerManagement extends Controller
     {
         $service = ServiceDetail::find($service_id);
         $category = Cat::all();
-        return view('company.companyedit', [
+        return view('company.companyserviceedit', [
             'service' => $service,
             'category' => $category
         ]);
@@ -95,7 +95,7 @@ class CompanyControllerManagement extends Controller
             return back()->with('fail', 'Please fill the corect format form.');
         }
     }
-    public function destroy($service_id)
+    public function Servicedestroy($service_id)
     {
         try {
             // Find the service by ID and delete it
@@ -109,4 +109,27 @@ class CompanyControllerManagement extends Controller
             return redirect()->back()->with('fail', 'Failed to delete service.');
         }
     }
+    public function CompanyEdit($company_id)
+    {
+        $company = company_detail::find($company_id);
+        return view('company.companyedit', [
+            'company' => $company
+        ]);
+       
+    }
+    public function CompanyUpdate(Request $request, company_detail $company)
+    {
+        $validatedData = $request->validate([
+
+            'description' => 'required',
+        ]);
+        $company->description = $validatedData['description'];
+        $company->save();
+        if ($company) {
+            return redirect()->route('companypage')->with('success', 'Company Description updated successfully');
+        } else {
+            return back()->with('fail', 'Please fill the corect format form.');
+        }
+    }
+   
 }

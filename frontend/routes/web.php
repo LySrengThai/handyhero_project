@@ -48,8 +48,11 @@ Route::post('/insertservice', [CompanyControllerManagement::class, 'serviceInser
 
 Route::get('/company/services/{service}/edit', [CompanyControllerManagement::class,'ServiceEdit'])->name('services.edit');
 Route::put('/company/services/{service}', [CompanyControllerManagement::class,'ServiceUpdate'])->name('services.update');
-Route::delete('/company/services/{service}',  [CompanyControllerManagement::class,'destroy'])->name('services.delete');
+Route::delete('/company/services/{service}',  [CompanyControllerManagement::class,'Serivedestroy'])->name('services.delete');
+Route::delete('/company/booking/{book}',  [CompanyControllerManagement::class,'BookingDelete'])->name('booking.delete');
 
+Route::get('/company/profile/{company_id}/edit', [CompanyControllerManagement::class,'CompanyEdit'])->name('company.edit');
+Route::put('/company/profile/{company}', [CompanyControllerManagement::class,'CompanyUpdate'])->name('company.update');
 
 Route::get('/login', [logincontroller::class, 'user_login']);
 Route::post('/userLoggedIn', [logincontroller::class, 'user_loggedin'])->name('userLoggedIn');
